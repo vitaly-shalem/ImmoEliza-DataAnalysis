@@ -1,0 +1,11 @@
+# byte-compiled / optimized / DLL files
+__pycache__/
+
+# virtual environment
+_project_env/
+
+# data folder to ignore
+zipcode_Belgium/
+
+# temp files and folders
+data/temp*
