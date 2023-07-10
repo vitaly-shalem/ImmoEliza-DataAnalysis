@@ -1,4 +1,4 @@
-postalCode,city,municipality,latitude,longtitude,cityAltName
+postalCode,city,municipality,latitude,longitude,cityAltName
 1000,Brussel,Brussel,50.8222854,4.3815707,Bruxelles
 1030,Schaarbeek,Schaarbeek,50.8222854,4.3815707,Schaerbeek
 1040,Etterbeek,Etterbeek,50.8222854,4.3815707,None
