@@ -1,11 +1,30 @@
 import numpy as np
 import pandas as pd
+import re
 
-from src.manage_csv import *
+from src.handle_files import *
 
 def subset_to_train_data(df, list):
     """ This function creates a subset of a DataFrame based on the list of required columns """
     return df[list]
+
+
+def create_localityType(postalCode):
+    """ This function converts a postal code to localityType, values are int 1 to 4 """
+    localityType = 0
+    # X000 & X00X > 1
+    if re.match(r"^[1-9][0]{3}$", postalCode) or re.match(r"^[1-9][0]{2}[1-9]$", postalCode):
+        localityType = 1
+    # X0X0 & X0XX> 2
+    elif re.match(r"^([1-9][0]){2}$", postalCode) or re.match(r"^[1-9][0][1-9]{2}$", postalCode):
+        localityType = 2
+    # XX00 & XX0X > 3
+    elif re.match(r"^[1-9]{2}[0]{2}$", postalCode) or re.match(r"^[1-9]{2}[0][1-9]$", postalCode):
+        localityType = 3
+    # XXX0 & XXXX > 4
+    elif re.match(r"^[1-9]{3}[0]$", postalCode) or re.match(r"^[1-9]{4}$", postalCode):
+        localityType = 4
+    return localityType
 
 
 def fill_null_values(df):
@@ -71,8 +90,8 @@ def prepare_data(raw, prep):
     # fill nul values
     df = fill_null_values(df)
 
-    # subset to train data
-    data_to_use = ["type", "region", "province", "district", "postalCode", "localityType", 
+    # subset to train data / "postalCode", 
+    data_to_use = ["type", "region", "province", "district", "localityType", 
                    "bedroomCount", "netHabitableSurface", "condition", "epcScore", 
                    "bathroomCount", "showerRoomCount", "toiletCount", 
                    "hasLift", "fireplaceExists", "hasSwimmingPool", "hasAirConditioning", 
