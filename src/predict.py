@@ -11,11 +11,11 @@ def predict_price(df, paths):
     scaler = joblib.load(paths["scaler"])
     model = joblib.load(paths["model"])
     
-    X = df.to_numpy()
-    X = transformer.transform(X)
-    X = scaler.transform(X)
+    X_predict = df.to_numpy()
+    X_predict = transformer.transform(X_predict)
+    X_predict = scaler.transform(X_predict)
 
-    prediction = (model.predict(X)).tolist()
-    price = prediction[0]
+    prediction = (model.predict(X_predict)).tolist()
+    price = round(prediction[0]/1000)*1000
 
     return price
