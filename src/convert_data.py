@@ -39,25 +39,6 @@ def map_epc(df):
     return df
 
 
-def subset_data(df):
-    """ This function creates a new dataframe, 
-        a subset of the main, with the data to be used in training """
-    subset = ["type", #"region", "province", "district", "localityType", 
-              "bedroomCount", "netHabitableSurface", "condition", "epcScore",
-              "bathroomCount", "showerRoomCount", "toiletCount", 
-              "hasLift", "fireplaceExists", "hasSwimmingPool", "hasAirConditioning", 
-              "hasGarden", "hasTerrace", "gardenSurface", "terraceSurface", "land",
-              "price"]
-    df = df[subset]
-    return df
-
-
-def get_col_dummies(df, column):
-    """ This function creates dummies dataframe for required column """
-    dummies = pd.get_dummies(df[column], prefix=column, prefix_sep="_", dtype=float, drop_first=True)
-    return dummies
-
-
 def convert_data(prep, train):
     """ This function runs the pipeline of data mapping for ML training """
     # load csv data
@@ -71,20 +52,6 @@ def convert_data(prep, train):
     #   - map epc score to nymeric values on a scale
     df = map_epc(df)
     
-    # create a new dataframe with the data to be used in training
-    #df_mapped = subset_data(df)
-
-    # create dummies for categorical values and merge
-    #   - region
-    #df_mapped = df_mapped.merge(get_col_dummies(df, "region"), on="ID")
-    #   - province
-    #df_mapped = df_mapped.merge(get_col_dummies(df, "province"), on="ID")
-    #   - district
-    #df_mapped = df_mapped.merge(get_col_dummies(df, "district"), on="ID")
-    #   - localityType (derived from postalCode)
-    #df_mapped = df_mapped.merge(get_col_dummies(df, "localityType"), on="ID")
-
-
     print("The train data has been prepared...")
     
     # save to csv file
