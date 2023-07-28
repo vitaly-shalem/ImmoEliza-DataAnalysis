@@ -96,11 +96,13 @@ def check_input_data(data_dict):
         - Checks some numerical values to be other than zero,
         - Compiles dictionary with error messages per data entry
         Returns: status, error dictionary, updated property data dictionary """
+    
     status = 200
     # 200 - OK, 204 - no content, 206 - partial content, 
     # 400 - bad request, 404 - not found, 
     # 406 - not acceptable, 421 - misdirected request
     errors = dict()
+    
     for key, value in data_dict.items():
         if key == "type":
             is_type, type_fixed = check_type(value)
@@ -216,6 +218,11 @@ def check_input_data(data_dict):
                 errors[key] = "Land has to be a number: zero or greater"
         else:
             continue
+    
     # adjust status according to errors length
-    if len(errors) > 0: status = 400
+    if len(errors) > 0: 
+        status = 400
+        errors["status"] = status
+        errors["description"] = "Bad request"
+
     return status, errors, data_dict
