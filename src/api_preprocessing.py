@@ -5,7 +5,7 @@ from src.prep_data import *
 from src.convert_data import *
 
 def fix_columns(df):
-    """ xxx """
+    """ Fix column order to match the model expectations """
     column_order = ["type", "region", "province", "district", "localityType",
                     "bedroomCount", "netHabitableSurface", "condition", "epcScore", 
                     "bathroomCount", "showerRoomCount", "toiletCount", 

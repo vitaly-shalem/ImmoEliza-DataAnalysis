@@ -4,7 +4,13 @@ import joblib
 
 
 def predict_price(df, paths):
-    """ xxx """
+    """ Predict the price of the property submitted by the user:
+        - Gets dataframe with property information and paths to the model and other relevant data
+        - Loads model, column transformer, minmax scaler
+        - Adjusts the data with transformer and scaler
+        - Runs prediction
+        - Adjusts prediction rounding to thousands
+        Returns price """
     price = None
 
     transformer = joblib.load(paths["transformer"])
