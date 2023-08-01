@@ -4,9 +4,9 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import json
 
-from src.api_check import check_input_data
-from src.api_preprocessing import process_property_data
-from src.api_predict import predict_price
+from src.api.check import check_input_data
+from src.api.preprocessing import process_property_data
+from src.api.predict import predict_price
 
 paths = dict()
 paths["transformer"] = Path.cwd() / "models" / "transformer.dat"
